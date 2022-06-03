@@ -31,10 +31,26 @@ exports.editApplication = async (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return new ErrorResponse("No application with this id!");
   }
-  try{
-    
+  try {
+    const updatedApplication = await Application.findByIdAndUpdate(
+      id,
+      { ...application, id },
+      { new: true }
+    );
+
+    res.status(200).json({ success: true, data: updatedApplication });
+  } catch (error) {
+    next(error.message);
   }
-  catch(error){
-      next(error.message)
+};
+
+exports.deleteApplication = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    await Application.findByIdAndRemove(id);
+
+    res.status(200).json({ success: true, message: "Successfully deleted" });
+  } catch (error) {
+    next(error.message);
   }
 };

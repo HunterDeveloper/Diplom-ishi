@@ -4,9 +4,20 @@ const bodyParser = require("body-parser");
 
 const errorHandler = require("./middlewares/error");
 const db = require("./config/db");
+const cors = require("cors");
 
 const app = express();
-dotenv.config(db);
+dotenv.config();
+
+// mongoDB connect
+db();
+
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
