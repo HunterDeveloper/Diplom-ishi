@@ -1,0 +1,93 @@
+.form_box {
+  margin: auto;
+}
+.Form {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 30px 30px;
+  border-radius: 5px;
+  margin-top: 80px;
+  box-shadow: rgb(0 0 0 / 20%) 0px 3px 3px -2px,
+    rgb(0 0 0 / 14%) 0px 3px 4px 0px, rgb(0 0 0 / 12%) 0px 1px 8px 0px;
+
+  h3 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: #444;
+    font-size: 30px;
+    font-weight: 500;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .input {
+    width: 48%;
+    margin: 35px 0;
+  }
+
+  .textarea {
+    width: 100%;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.4375em;
+    letter-spacing: 0.00938em;
+    color: rgba(0, 0, 0, 0.87);
+    box-sizing: border-box;
+    position: relative;
+    cursor: text;
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: relative;
+    border-radius: 4px;
+    outline: none;
+    padding: 6px 10px;
+    border: rgba(0, 0, 0, 0.23) solid 1px;
+
+    &:focus {
+      border-color: #1976d2;
+      border-width: 2px;
+    }
+  }
+
+  .file_input {
+    width: 48%;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.4375em;
+    letter-spacing: 0.00938em;
+    color: rgba(0, 0, 0, 0.87);
+    box-sizing: border-box;
+    position: relative;
+    cursor: text;
+    align-items: center;
+    position: relative;
+    border-radius: 4px;
+    outline: none;
+    padding: 6px 10px;
+    border: rgba(0, 0, 0, 0.23) solid 1px;
+    margin: 35px 0;
+    display: flex;
+    align-items: center;
+    padding: 14px;
+
+    input#file-upload-button {
+      border: none;
+    }
+
+    &:focus {
+      border-color: #1976d2;
+      border-width: 2px;
+    }
+  }
+}

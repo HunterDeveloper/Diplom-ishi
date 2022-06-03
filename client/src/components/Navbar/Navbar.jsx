@@ -9,6 +9,9 @@ import {
   Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import { Link } from "react-router-dom";
+
+import "./Navbar.scss";
 
 const Navbar = () => {
   return (
@@ -25,11 +28,13 @@ const Navbar = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+            Home
           </Typography>
-          <Button color="inherit" size="large">
-            Login
-          </Button>
+          <Link className="control_link" to="/control/auth">
+            <Button color="inherit" size="large">
+              Kirish
+            </Button>
+          </Link>
         </Toolbar>
       </AppBar>
     </Box>
