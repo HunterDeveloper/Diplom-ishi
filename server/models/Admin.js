@@ -12,7 +12,7 @@ const adminSchema = mongoose.Schema({
     required: [true, "Please enter admin email adress"],
   },
   password: {
-    type: Number,
+    type: String,
     required: [true, "Please enter admin password"],
   },
   status: {

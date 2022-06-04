@@ -22,7 +22,7 @@ const Form = () => {
   console.log(files);
 
   return (
-    <Grid lg={6} container className="form_box">
+    <Grid lg={6} item container style={{ margin: "auto" }}>
       <form className="Form">
         <h3>Murojat formasi</h3>
         <TextField

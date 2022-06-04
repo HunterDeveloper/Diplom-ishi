@@ -9,11 +9,19 @@ import {
   Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import "./Navbar.scss";
 
 const Navbar = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    localStorage.removeItem("authToken");
+    navigate("/");
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -28,13 +36,21 @@ const Navbar = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Home
+            <Link to="/" className="nav_link">
+              Home
+            </Link>
           </Typography>
-          <Link className="control_link" to="/control/auth">
-            <Button color="inherit" size="large">
-              Kirish
+          {location.pathname === "/" ? (
+            <Link className="control_link" to="/control/auth">
+              <Button color="inherit" size="large">
+                Kirish
+              </Button>
+            </Link>
+          ) : (
+            <Button color="inherit" size="large" onClick={logoutHandler}>
+              Chiqish
             </Button>
-          </Link>
+          )}
         </Toolbar>
       </AppBar>
     </Box>
