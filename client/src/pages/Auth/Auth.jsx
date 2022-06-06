@@ -48,17 +48,6 @@ const Auth = () => {
         setError("");
       }, 5000);
     }
-
-    const { data } = await axios.post(
-      "http://localhost:5000/api/admin/auth",
-      {
-        email,
-        password,
-      },
-      config
-    );
-
-    console.log(data);
   };
 
   return (

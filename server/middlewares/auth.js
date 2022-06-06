@@ -9,7 +9,7 @@ exports.protect = async (req, res, next) => {
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
   ) {
-    ("Bearer das23fn23489237nv9873843829v283nv932874");
+    // ("Bearer das23fn23489237nv9873843829v283nv932874");
     token = req.headers.authorization.split(" ")[1];
   }
 

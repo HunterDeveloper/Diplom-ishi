@@ -18,3 +18,10 @@ export const editApplication = (id, updatedApplication) =>
   axios.put(`${URL}/api/application/${id}`, updatedApplication);
 export const deleteApplication = (id) =>
   axios.delete(`${URL}/api/application/${id}`);
+
+// admin
+export const getAdmin = () => axios.get(`${URL}/api/admin`);
+export const createAdmin = (admin) => axios.post(`${URL}/api/admin`, admin);
+export const editAdmin = (id, updatedAdmin) =>
+  axios.put(`${URL}/api/admin/${id}`, updatedAdmin);
+export const deleteAdmin = (id) => axios.delete(`${URL}/api/admin/${id}`);

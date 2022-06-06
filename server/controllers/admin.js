@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const Admin = require("../models/Admin");
 const Application = require("../models/Application");
 const ErrorResponse = require("../utils/ErrorResponse");
@@ -40,10 +41,10 @@ exports.editAdmin = async (req, res, next) => {
     return new ErrorResponse("No admin with this id!", 404);
   }
   try {
-    const updatedAdmin = await findByIdAndUpdate(
+    const updatedAdmin = await Admin.findByIdAndUpdate(
       id,
       { ...admin, id },
-      { next: true }
+      { new: true }
     );
 
     res.status(200).json({ success: true, data: updatedAdmin });
@@ -53,12 +54,12 @@ exports.editAdmin = async (req, res, next) => {
 };
 
 exports.deleteAdmin = async (req, res, next) => {
-  const { id } = req.body;
+  const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return new ErrorResponse("No admin with this id!", 404);
   }
   try {
-    await Application.findByIdAndRemove(id);
+    await Admin.findByIdAndRemove(id);
 
     res.status(200).json({ success: true, message: "Successfully deleted" });
   } catch (error) {
@@ -92,6 +93,14 @@ exports.login = async (req, res, next) => {
   } catch (error) {
     next(error.message);
   }
+};
+
+exports.getControlData = (req, res, next) => {
+  res.status(200).json({
+    success: true,
+    data: "You got access to the private data in this route",
+    admin: req.admin,
+  });
 };
 
 const sendToken = (admin, statusCode, res) => {

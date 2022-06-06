@@ -2,12 +2,12 @@ import {
   CREATE_CATEGORY,
   DELETE_CATEGORY,
   EDIT_CATEGORY,
-  GET_CATEGOEY,
+  GET_CATEGORY,
 } from "../constants/actionTypes";
 
 export const categories = (categories = [], action) => {
   switch (action.type) {
-    case GET_CATEGOEY:
+    case GET_CATEGORY:
       return action.payload;
     case CREATE_CATEGORY:
       return [...categories, action.payload];

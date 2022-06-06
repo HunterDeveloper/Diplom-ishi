@@ -10,6 +10,7 @@ import {
   deleteCategory,
   editCategory,
 } from "./category";
+import { createAdmin, deleteAdmin, editAdmin, getAdmin } from "./admin";
 
 export {
   getCategory,
@@ -20,4 +21,8 @@ export {
   createApplication,
   deleteApplication,
   editApplication,
+  createAdmin,
+  deleteAdmin,
+  editAdmin,
+  getAdmin,
 };

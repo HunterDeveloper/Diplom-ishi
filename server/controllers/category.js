@@ -43,7 +43,7 @@ exports.editCategory = async (req, res, next) => {
   }
 };
 
-exports.deleteCategory = async () => {
+exports.deleteCategory = async (req, res, next) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return new ErrorResponse("No category with this id!", 404);
