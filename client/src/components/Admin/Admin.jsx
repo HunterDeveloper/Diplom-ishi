@@ -24,6 +24,11 @@ const Admin = () => {
     dispatch(getAdmin());
   }, [dispatch]);
 
+  const isFormValid = () =>
+    (admin.name.length !== 0 || currentAdmin.name.length !== 0) &&
+    (admin.email.length !== 0 || currentAdmin.email.length !== 0) &&
+    (admin.password.length >= 6 || currentAdmin.password.length >= 6);
+
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
@@ -119,6 +124,7 @@ const Admin = () => {
             variant="contained"
             type="submit"
             className="button"
+            disabled={!isFormValid()}
           >
             {currentId ? "Edit admin" : "Add admin"}
           </Button>

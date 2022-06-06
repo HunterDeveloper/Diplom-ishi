@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Admin, Category, Navbar } from "../components";
 
 import axios from "axios";
-import { Button, IconButton, Snackbar } from "@mui/material";
+import { IconButton, Snackbar } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 const Control = () => {

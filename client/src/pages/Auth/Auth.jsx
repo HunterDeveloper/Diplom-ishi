@@ -18,6 +18,8 @@ const Auth = () => {
     }
   }, [navigate]);
 
+  const isFormValid = () => email.length !== 0 && password.length >= 6;
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
@@ -36,8 +38,6 @@ const Auth = () => {
         },
         config
       );
-
-      console.log(data);
 
       localStorage.setItem("authToken", data.token);
 
@@ -71,7 +71,7 @@ const Auth = () => {
             onChange={(e) => setPassword(e.target.value)}
             className="input"
           />
-          <Button type="submit" variant="contained">
+          <Button type="submit" disabled={!isFormValid()} variant="contained">
             Kirish
           </Button>
         </form>

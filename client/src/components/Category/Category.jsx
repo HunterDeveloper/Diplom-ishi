@@ -19,11 +19,15 @@ const Category = () => {
   const categories = useSelector((state) => state.categories);
   const [category, setCategory] = useState("");
   const [currentId, setCurrentId] = useState();
-  const [currentCtg, setCurrentCtg] = useState();
+  const [currentCtg, setCurrentCtg] = useState({ name: "" });
 
   useEffect(() => {
     dispatch(getCategory());
   }, [dispatch]);
+
+  const isFormValid = () => {
+    return category.length !== 0 || currentCtg.name.length !== 0;
+  };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -48,7 +52,7 @@ const Category = () => {
   };
 
   const clean = () => {
-    setCurrentCtg("");
+    setCurrentCtg({ name: "" });
     setCurrentId("");
     setCategory("");
   };
@@ -94,6 +98,7 @@ const Category = () => {
           />
           <Button
             size="large"
+            disabled={!isFormValid()}
             variant="contained"
             type="submit"
             className="button"

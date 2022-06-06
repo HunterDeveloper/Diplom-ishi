@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   FormControl,
@@ -11,19 +11,51 @@ import {
 } from "@mui/material";
 
 import "./Form.scss";
+import { createApplication, getCategory } from "../../actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const Form = () => {
+  const dispatch = useDispatch();
   const [city, setCity] = useState("");
   const [region, setRegion] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [description, setDescription] = useState("");
   const [files, setFiles] = useState("");
 
-  console.log(files);
+  useEffect(() => {
+    dispatch(getCategory());
+  }, [dispatch]);
+
+  const categories = useSelector((state) => state.categories);
+
+  const isFormValid = () => {
+    return (
+      city.length !== 0 &&
+      region.length !== 0 &&
+      categoryId.length !== 0 &&
+      description.length !== 0 &&
+      !!files
+    );
+  };
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    const application = { city, region, categoryId, description, files };
+    dispatch(createApplication(application));
+    clean();
+  };
+
+  const clean = () => {
+    setCity("");
+    setRegion("");
+    setCategoryId("");
+    setDescription("");
+    setFiles("");
+  };
 
   return (
     <Grid lg={6} item container style={{ margin: "auto" }}>
-      <form className="Form">
+      <form className="Form" onSubmit={onSubmitHandler}>
         <h3>Murojat formasi</h3>
         <TextField
           label="Shahar"
@@ -54,9 +86,13 @@ const Form = () => {
             label="Murojat turi"
             onChange={(e) => setCategoryId(e.target.value)}
           >
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            {categories.length
+              ? categories.map((ctg, idx) => (
+                  <MenuItem value={ctg._id} key={idx}>
+                    {ctg.name}
+                  </MenuItem>
+                ))
+              : null}
           </Select>
         </FormControl>
         <input
@@ -65,7 +101,13 @@ const Form = () => {
           className="file_input"
           onChange={(e) => setFiles(e.target.files)}
         />
-        <Button variant="contained" size="large" style={{ margin: "auto" }}>
+        <Button
+          variant="contained"
+          disabled={!isFormValid()}
+          type="submit"
+          size="large"
+          style={{ margin: "auto" }}
+        >
           Jo'natish
         </Button>
       </form>

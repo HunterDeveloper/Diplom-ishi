@@ -1,11 +1,12 @@
 import React from "react";
-import { Form, Navbar } from "../components";
+import { ChartComponent, Form, Navbar } from "../components";
 
 const Home = () => {
   return (
     <>
       <Navbar />
       <Form />
+      <ChartComponent />
     </>
   );
 };

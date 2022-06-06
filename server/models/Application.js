@@ -18,7 +18,7 @@ const applicationSchema = mongoose.Schema({
     required: [true, "Please enter application description"],
   },
   files: {
-    type: String,
+    type: Array,
     default: "There is no file not yet",
     required: [true, "Please enter application Files"],
   },
