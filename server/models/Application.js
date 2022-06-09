@@ -22,6 +22,14 @@ const applicationSchema = mongoose.Schema({
     default: "There is no file not yet",
     required: [true, "Please enter application Files"],
   },
+  status: {
+    type: String,
+    required: true,
+    default: "progress",
+  },
+  date: { type: Date, default: Date.now },
+  name: String,
+  surname: String,
 });
 
 const Application = mongoose.model("Application", applicationSchema);

@@ -16,6 +16,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Form = () => {
   const dispatch = useDispatch();
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
   const [city, setCity] = useState("");
   const [region, setRegion] = useState("");
   const [categoryId, setCategoryId] = useState("");
@@ -58,6 +60,21 @@ const Form = () => {
       <form className="Form" onSubmit={onSubmitHandler}>
         <h3>Murojat formasi</h3>
         <TextField
+          label="Ism (ixtiyoriy)"
+          variant="outlined"
+          placeholder="ixtiyoriy"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="input"
+        />
+        <TextField
+          label="Familiya (ixtiyoriy)"
+          variant="outlined"
+          value={surname}
+          onChange={(e) => setSurname(e.target.value)}
+          className="input"
+        />
+        <TextField
           label="Shahar"
           variant="outlined"
           value={city}
@@ -79,7 +96,7 @@ const Form = () => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <FormControl fullWidth className="input">
+        <FormControl fullWidth className="select">
           <InputLabel id="demo-simple-select-label">Murojat turi</InputLabel>
           <Select
             value={categoryId}
