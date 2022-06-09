@@ -25,7 +25,7 @@ const applicationSchema = mongoose.Schema({
   status: {
     type: String,
     required: true,
-    default: "progress",
+    default: "in-progress",
   },
   date: { type: Date, default: Date.now },
   name: String,

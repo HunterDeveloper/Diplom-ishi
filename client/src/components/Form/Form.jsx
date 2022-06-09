@@ -10,6 +10,10 @@ import {
   TextField,
 } from "@mui/material";
 
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+
 import "./Form.scss";
 import { createApplication, getCategory } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +26,7 @@ const Form = () => {
   const [region, setRegion] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [description, setDescription] = useState("");
+  const [date, setDate] = useState("");
   const [files, setFiles] = useState("");
 
   useEffect(() => {
@@ -36,13 +41,23 @@ const Form = () => {
       region.length !== 0 &&
       categoryId.length !== 0 &&
       description.length !== 0 &&
+      date.length !== 0 &&
       !!files
     );
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    const application = { city, region, categoryId, description, files };
+    const application = {
+      city,
+      region,
+      categoryId,
+      description,
+      files,
+      name,
+      surname,
+      date,
+    };
     dispatch(createApplication(application));
     clean();
   };
@@ -56,7 +71,7 @@ const Form = () => {
   };
 
   return (
-    <Grid lg={6} item container style={{ margin: "auto" }}>
+    <Grid lg={8} item container style={{ margin: "auto" }}>
       <form className="Form" onSubmit={onSubmitHandler}>
         <h3>Murojat formasi</h3>
         <TextField
@@ -118,15 +133,28 @@ const Form = () => {
           className="file_input"
           onChange={(e) => setFiles(e.target.files)}
         />
-        <Button
-          variant="contained"
-          disabled={!isFormValid()}
-          type="submit"
-          size="large"
-          style={{ margin: "auto" }}
-        >
-          Jo'natish
-        </Button>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            label="Sana"
+            value={date}
+            onChange={(newValue) => {
+              setDate(newValue);
+            }}
+            renderInput={(params) => (
+              <TextField className="input" {...params} error={false} />
+            )}
+          />
+        </LocalizationProvider>
+        <div className="form_button">
+          <Button
+            variant="contained"
+            disabled={!isFormValid()}
+            type="submit"
+            size="large"
+          >
+            Jo'natish
+          </Button>
+        </div>
       </form>
     </Grid>
   );

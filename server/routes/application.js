@@ -5,11 +5,12 @@ const {
   deleteApplication,
   editApplication,
 } = require("../controllers/application");
+const { protect } = require("../middlewares/auth");
 const router = Router();
 
-router.route("/").get(getApplication);
+router.route("/").get(protect, getApplication);
 router.route("/").post(createApplication);
-router.route("/:id").put(editApplication);
-router.route("/:id").delete(deleteApplication);
+router.route("/:id").put(protect, editApplication);
+router.route("/:id").delete(protect, deleteApplication);
 
 module.exports = router;

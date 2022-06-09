@@ -19,13 +19,13 @@ export const deleteCategory = (id) =>
   axios.delete(`${URL}/api/category/${id}`, config);
 
 // application
-export const getApplication = () => axios.get(`${URL}/api/application`);
+export const getApplication = () => axios.get(`${URL}/api/application`, config);
 export const createApplication = (application) =>
   axios.post(`${URL}/api/application`, application);
 export const editApplication = (id, updatedApplication) =>
-  axios.put(`${URL}/api/application/${id}`, updatedApplication);
+  axios.put(`${URL}/api/application/${id}`, updatedApplication, config);
 export const deleteApplication = (id) =>
-  axios.delete(`${URL}/api/application/${id}`);
+  axios.delete(`${URL}/api/application/${id}`, config);
 
 // admin
 export const getAdmin = () => axios.get(`${URL}/api/admin`, config);

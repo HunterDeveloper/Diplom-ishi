@@ -100,4 +100,13 @@
       border-width: 2px;
     }
   }
+
+  .form_button {
+    width: 100%;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+  }
 }

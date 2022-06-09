@@ -1,4 +1,4 @@
-import { Button, TextField } from "@mui/material";
+import { Button, Grid, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "../../components";
@@ -58,56 +58,58 @@ const Category = () => {
   };
 
   return (
-    <div className="Category">
-      <div className="category_list">
-        <h3>Category list</h3>
-        <ul className="menu">
-          {categories.length ? (
-            categories.map((ctg, idx) => (
-              <li key={idx}>
-                <span>#{idx + 1}</span>
-                <p>{ctg.name}</p>
-                <div className="item_icons">
-                  <button onClick={() => onEditHandler(ctg._id)}>
-                    <EditIcon />
-                  </button>
-                  <button onClick={() => onDeleteHandler(ctg._id)}>
-                    <DeleteIcon />
-                  </button>
-                </div>
-              </li>
-            ))
-          ) : (
-            <Loader />
-          )}
-        </ul>
+    <Grid lg={8} item container style={{ margin: "auto" }}>
+      <div className="Category">
+        <div className="category_list">
+          <h3>Category list</h3>
+          <ul className="menu">
+            {categories.length ? (
+              categories.map((ctg, idx) => (
+                <li key={idx}>
+                  <span>#{idx + 1}</span>
+                  <p>{ctg.name}</p>
+                  <div className="item_icons">
+                    <button onClick={() => onEditHandler(ctg._id)}>
+                      <EditIcon />
+                    </button>
+                    <button onClick={() => onDeleteHandler(ctg._id)}>
+                      <DeleteIcon />
+                    </button>
+                  </div>
+                </li>
+              ))
+            ) : (
+              <Loader />
+            )}
+          </ul>
+        </div>
+        <div className="category_form">
+          <h3>Category form</h3>
+          <form className="form" onSubmit={onSubmitHandler}>
+            <TextField
+              label="Kategoriya"
+              variant="outlined"
+              value={currentId ? currentCtg.name : category}
+              onChange={(e) =>
+                currentId
+                  ? setCurrentCtg({ name: e.target.value })
+                  : setCategory(e.target.value)
+              }
+              className="input"
+            />
+            <Button
+              size="large"
+              disabled={!isFormValid()}
+              variant="contained"
+              type="submit"
+              className="button"
+            >
+              {currentId ? "Edit category" : "Add category"}
+            </Button>
+          </form>
+        </div>
       </div>
-      <div className="category_form">
-        <h3>Category form</h3>
-        <form className="form" onSubmit={onSubmitHandler}>
-          <TextField
-            label="Kategoriya"
-            variant="outlined"
-            value={currentId ? currentCtg.name : category}
-            onChange={(e) =>
-              currentId
-                ? setCurrentCtg({ name: e.target.value })
-                : setCategory(e.target.value)
-            }
-            className="input"
-          />
-          <Button
-            size="large"
-            disabled={!isFormValid()}
-            variant="contained"
-            type="submit"
-            className="button"
-          >
-            {currentId ? "Edit category" : "Add category"}
-          </Button>
-        </form>
-      </div>
-    </div>
+    </Grid>
   );
 };
 

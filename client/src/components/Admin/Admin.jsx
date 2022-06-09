@@ -7,7 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import "./Admin.scss";
 import { createAdmin, deleteAdmin, editAdmin, getAdmin } from "../../actions/";
-import { Button, TextField } from "@mui/material";
+import { Button, Grid, TextField } from "@mui/material";
 
 const Admin = () => {
   const dispatch = useDispatch();
@@ -58,79 +58,84 @@ const Admin = () => {
   };
 
   return (
-    <div className="Admin">
-      <div className="admin_list">
-        <h3>Admin list</h3>
-        <ul className="menu">
-          {admins.length ? (
-            admins.map((a, idx) => (
-              <li key={idx}>
-                <span>#{idx + 1}</span>
-                <p>{a.name}</p>
-                <p>{a.email}</p>
-                <div className="item_icons">
-                  <button onClick={() => onEditHandler(a._id)}>
-                    <EditIcon />
-                  </button>
-                  <button onClick={() => onDeleteHandler(a._id)}>
-                    <DeleteIcon />
-                  </button>
-                </div>
-              </li>
-            ))
-          ) : (
-            <Loader />
-          )}
-        </ul>
+    <Grid lg={8} item container style={{ margin: "auto" }}>
+      <div className="Admin">
+        <div className="admin_list">
+          <h3>Admin list</h3>
+          <ul className="menu">
+            {admins.length ? (
+              admins.map((a, idx) => (
+                <li key={idx}>
+                  <span>#{idx + 1}</span>
+                  <p>{a.name}</p>
+                  <p>{a.email}</p>
+                  <div className="item_icons">
+                    <button onClick={() => onEditHandler(a._id)}>
+                      <EditIcon />
+                    </button>
+                    <button onClick={() => onDeleteHandler(a._id)}>
+                      <DeleteIcon />
+                    </button>
+                  </div>
+                </li>
+              ))
+            ) : (
+              <Loader />
+            )}
+          </ul>
+        </div>
+        <div className="admin_form">
+          <h3>Admin form</h3>
+          <form className="form" onSubmit={onSubmitHandler}>
+            <TextField
+              label="Name"
+              variant="outlined"
+              value={currentId ? currentAdmin.name : admin.name}
+              onChange={(e) =>
+                currentId
+                  ? setCurrentAdmin({ ...currentAdmin, name: e.target.value })
+                  : setAdmin({ ...admin, name: e.target.value })
+              }
+              className="input"
+            />
+            <TextField
+              label="E-mail"
+              variant="outlined"
+              value={currentId ? currentAdmin.email : admin.email}
+              onChange={(e) =>
+                currentId
+                  ? setCurrentAdmin({ ...currentAdmin, email: e.target.value })
+                  : setAdmin({ ...admin, email: e.target.value })
+              }
+              className="input"
+            />
+            <TextField
+              label="Password"
+              variant="outlined"
+              value={currentId ? currentAdmin.password : admin.password}
+              onChange={(e) =>
+                currentId
+                  ? setCurrentAdmin({
+                      ...currentAdmin,
+                      password: e.target.value,
+                    })
+                  : setAdmin({ ...admin, password: e.target.value })
+              }
+              className="input"
+            />
+            <Button
+              size="large"
+              variant="contained"
+              type="submit"
+              className="button"
+              disabled={!isFormValid()}
+            >
+              {currentId ? "Edit admin" : "Add admin"}
+            </Button>
+          </form>
+        </div>
       </div>
-      <div className="admin_form">
-        <h3>Admin form</h3>
-        <form className="form" onSubmit={onSubmitHandler}>
-          <TextField
-            label="Name"
-            variant="outlined"
-            value={currentId ? currentAdmin.name : admin.name}
-            onChange={(e) =>
-              currentId
-                ? setCurrentAdmin({ ...currentAdmin, name: e.target.value })
-                : setAdmin({ ...admin, name: e.target.value })
-            }
-            className="input"
-          />
-          <TextField
-            label="E-mail"
-            variant="outlined"
-            value={currentId ? currentAdmin.email : admin.email}
-            onChange={(e) =>
-              currentId
-                ? setCurrentAdmin({ ...currentAdmin, email: e.target.value })
-                : setAdmin({ ...admin, email: e.target.value })
-            }
-            className="input"
-          />
-          <TextField
-            label="Password"
-            variant="outlined"
-            value={currentId ? currentAdmin.password : admin.password}
-            onChange={(e) =>
-              currentId
-                ? setCurrentAdmin({ ...currentAdmin, password: e.target.value })
-                : setAdmin({ ...admin, password: e.target.value })
-            }
-            className="input"
-          />
-          <Button
-            size="large"
-            variant="contained"
-            type="submit"
-            className="button"
-            disabled={!isFormValid()}
-          >
-            {currentId ? "Edit admin" : "Add admin"}
-          </Button>
-        </form>
-      </div>
-    </div>
+    </Grid>
   );
 };
 
