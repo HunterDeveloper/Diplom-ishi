@@ -11,6 +11,7 @@ import {
   editCategory,
 } from "./category";
 import { createAdmin, deleteAdmin, editAdmin, getAdmin } from "./admin";
+import { chartApplications } from "./chartApplication";
 
 export {
   getCategory,
@@ -25,4 +26,5 @@ export {
   deleteAdmin,
   editAdmin,
   getAdmin,
+  chartApplications,
 };

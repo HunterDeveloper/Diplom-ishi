@@ -15,7 +15,11 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import "./Form.scss";
-import { createApplication, getCategory } from "../../actions";
+import {
+  chartApplications,
+  createApplication,
+  getCategory,
+} from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const Form = () => {
@@ -59,6 +63,7 @@ const Form = () => {
       date,
     };
     dispatch(createApplication(application));
+    dispatch(chartApplications());
     clean();
   };
 
@@ -138,7 +143,7 @@ const Form = () => {
             label="Sana"
             value={date}
             onChange={(newValue) => {
-              setDate(newValue);
+              setDate(`${newValue}`);
             }}
             renderInput={(params) => (
               <TextField className="input" {...params} error={false} />

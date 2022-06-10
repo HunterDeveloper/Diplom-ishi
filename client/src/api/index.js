@@ -19,7 +19,7 @@ export const deleteCategory = (id) =>
   axios.delete(`${URL}/api/category/${id}`, config);
 
 // application
-export const getApplication = () => axios.get(`${URL}/api/application`, config);
+export const getApplication = () => axios.get(`${URL}/api/application`);
 export const createApplication = (application) =>
   axios.post(`${URL}/api/application`, application);
 export const editApplication = (id, updatedApplication) =>

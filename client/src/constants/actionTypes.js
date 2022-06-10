@@ -15,3 +15,6 @@ export const GET_ADMIN = "GET_ADMIN";
 export const CREATE_ADMIN = "CREATE_ADMIN";
 export const EDIT_ADMIN = "EDIT_ADMIN";
 export const DELETE_ADMIN = "DELETE_ADMIN";
+
+// chart application
+export const CHART_APPLICATION = "CHART_APPLICATION";

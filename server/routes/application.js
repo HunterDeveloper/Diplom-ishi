@@ -8,7 +8,7 @@ const {
 const { protect } = require("../middlewares/auth");
 const router = Router();
 
-router.route("/").get(protect, getApplication);
+router.route("/").get(getApplication);
 router.route("/").post(createApplication);
 router.route("/:id").put(protect, editApplication);
 router.route("/:id").delete(protect, deleteApplication);
