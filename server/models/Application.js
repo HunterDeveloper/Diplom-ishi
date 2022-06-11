@@ -11,7 +11,7 @@ const applicationSchema = mongoose.Schema({
   },
   categoryId: {
     type: mongoose.Types.ObjectId,
-    required: [true, "Please enter application password"],
+    required: [true, "Please enter application category id"],
   },
   description: {
     type: String,

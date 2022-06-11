@@ -1,5 +1,5 @@
 import { Button, Grid, TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "../../components";
 
@@ -7,12 +7,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import "./Category.scss";
-import {
-  createCategory,
-  deleteCategory,
-  editCategory,
-  getCategory,
-} from "../../actions";
+import { createCategory, deleteCategory, editCategory } from "../../actions";
 
 const Category = () => {
   const dispatch = useDispatch();
@@ -20,10 +15,6 @@ const Category = () => {
   const [category, setCategory] = useState("");
   const [currentId, setCurrentId] = useState();
   const [currentCtg, setCurrentCtg] = useState({ name: "" });
-
-  useEffect(() => {
-    dispatch(getCategory());
-  }, [dispatch]);
 
   const isFormValid = () => {
     return category.length !== 0 || currentCtg.name.length !== 0;

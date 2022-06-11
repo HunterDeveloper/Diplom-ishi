@@ -1,59 +1,47 @@
 import * as api from "../api";
 import { CHART_APPLICATION } from "../constants/actionTypes";
 
-import moment from "moment";
-
-export const chartApplications = () => async (dispatch) => {
+export const chartApplications = (id) => async (dispatch) => {
   try {
     const { data } = await api.getApplication();
 
-    const arr = data.data.map((a) => {
-      a.count = 1;
-      return a;
-    });
+    const arr = [
+      { x: "Cancel", y: 0, text: "" },
+      { x: "Success", y: 0, text: "" },
+      { x: "In progress", y: 0, text: "" },
+    ];
 
-    const obj = {
-      cancel: [],
-      success: [],
-      progress: [],
-    };
+    if (id) {
+      let cloneArr = data.data.filter((elem) => elem.categoryId === id);
 
-    data.data.map((d, i) => {
-      d.count = 1;
-      d.date = moment(d.date).format("L");
-      if (d.status === "cancel") {
-        let idx;
-        let e = obj.cancel.find((a, ind) => {
-          idx = ind;
-          return a.date === d.date;
-        });
-        if (e) {
-          obj.cancel[idx].count++;
-        } else obj.cancel.push(d);
-      } else if (d.status === "success") {
-        let idx;
-        let e = obj.success.find((a, ind) => {
-          idx = ind;
-          return a.date === d.date;
-        });
-        if (e) {
-          obj.success[idx].count++;
-        } else obj.success.push(d);
-      } else {
-        let idx;
-        let e = obj.progress.find((a, ind) => {
-          idx = ind;
-          return a.date === d.date;
-        });
-        if (e) {
-          obj.progress[idx].count++;
-        } else obj.progress.push(d);
-      }
+      cloneArr.map((elem) => {
+        if (elem.status === "cancel") {
+          arr[0].y++;
+        }
+        if (elem.status === "success") {
+          arr[1].y++;
+        }
+        if (elem.status === "in-progress") {
+          arr[2].y++;
+        }
 
-      return d;
-    });
+        return elem;
+      });
+    } else {
+      data.data.map((elem) => {
+        if (elem.status === "cancel") {
+          arr[0].y++;
+        }
+        if (elem.status === "success") {
+          arr[1].y++;
+        }
+        if (elem.status === "in-progress") {
+          arr[2].y++;
+        }
 
-    console.log(obj);
+        return elem;
+      });
+    }
 
     dispatch({ type: CHART_APPLICATION, payload: arr });
   } catch (error) {

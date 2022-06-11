@@ -5,6 +5,7 @@ import { FormControl, Grid, InputLabel, MenuItem, Select } from "@mui/material";
 import Loader from "../Loader/Loader";
 
 import "./Application.scss";
+import { Link } from "react-router-dom";
 
 const Application = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const Application = () => {
                     <p className="text">{app.surname}</p>
                   </div>
                   <p className="city text">{app.city}</p>
+                  <Link to={`/control/files/${app._id}`}>Files</Link>
                   <div className="status">
                     <FormControl fullWidth className="select">
                       <InputLabel id="demo-simple-select-label">

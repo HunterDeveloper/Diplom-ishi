@@ -5,8 +5,11 @@ import { Admin, Application, Category, Navbar } from "../components";
 import axios from "axios";
 import { IconButton, Snackbar } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { useDispatch } from "react-redux";
+import { getAdmin, getCategory } from "../actions";
 
 const Control = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [admin, setAdmin] = useState({});
   const [error, setError] = useState("");
@@ -15,6 +18,8 @@ const Control = () => {
     if (!localStorage.getItem("authToken")) {
       navigate("/control/auth");
     }
+    dispatch(getAdmin());
+    dispatch(getCategory());
 
     const fetchData = async () => {
       const config = {
@@ -33,12 +38,13 @@ const Control = () => {
         setAdmin(data.admin);
       } catch (error) {
         localStorage.removeItem("authToken");
+        navigate("/");
         setError("You are not authorized please login");
       }
     };
 
     fetchData();
-  }, [navigate]);
+  }, [navigate, dispatch]);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -72,8 +78,8 @@ const Control = () => {
         action={action}
       />
       <Category />
-      <Application />
       {admin.status === "owner" ? <Admin /> : null}
+      <Application />
     </>
   );
 };

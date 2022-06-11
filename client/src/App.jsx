@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Routes, Route } from "react-router-dom";
-import { Auth, Control, Home } from "./pages";
+import { Auth, Control, Files, Home } from "./pages";
 
 const App = () => {
   return (
@@ -9,6 +9,7 @@ const App = () => {
       <Route path="/" element={<Home />} />
       <Route path="/control/" element={<Control />} />
       <Route path="/control/auth" element={<Auth />} />
+      <Route path="/control/files/:id" element={<Files />} />
     </Routes>
   );
 };

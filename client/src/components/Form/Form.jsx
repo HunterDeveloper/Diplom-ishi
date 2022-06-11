@@ -33,6 +33,8 @@ const Form = () => {
   const [date, setDate] = useState("");
   const [files, setFiles] = useState("");
 
+  console.log(files);
+
   useEffect(() => {
     dispatch(getCategory());
   }, [dispatch]);
@@ -52,18 +54,19 @@ const Form = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    const application = {
-      city,
-      region,
-      categoryId,
-      description,
-      files,
-      name,
-      surname,
-      date,
-    };
-    dispatch(createApplication(application));
+    const data = new FormData();
+
+    data.append("city", city);
+    data.append("region", region);
+    data.append("categoryId", categoryId);
+    data.append("description", description);
+    data.append("files", files);
+    data.append("name", name);
+    data.append("surname", surname);
+    data.append("date", date);
+
     dispatch(chartApplications());
+    dispatch(createApplication(data));
     clean();
   };
 

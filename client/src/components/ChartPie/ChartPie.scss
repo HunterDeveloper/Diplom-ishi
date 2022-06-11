@@ -1,0 +1,65 @@
+.ChartPie {
+  width: 100%;
+  padding: 20px 25px;
+  margin-top: 70px;
+  margin-bottom: 60px;
+  box-shadow: rgb(0 0 0 / 20%) 0px 3px 3px -2px,
+    rgb(0 0 0 / 14%) 0px 3px 4px 0px, rgb(0 0 0 / 12%) 0px 1px 8px 0px;
+
+  #pie-chart_Series_0_Point_0 {
+    fill: #f24c4c !important ;
+    stroke: #f24c4c !important;
+  }
+  #pie-chart_Series_0_Point_1 {
+    fill: #00bdae !important;
+    stroke: #00bdae !important;
+  }
+  #pie-chart_Series_0_Point_2 {
+    fill: #357cd2 !important;
+    stroke: #357cd2 !important;
+  }
+
+  #pie-chartPointHover_Border[fill="#357cd2"] {
+    fill: #357cd2 !important;
+    stroke: #357cd2 !important;
+  }
+  #pie-chartPointHover_Border[fill="#404041"] {
+    fill: #00bdae !important;
+    stroke: #00bdae !important;
+  }
+  #pie-chartPointHover_Border[fill="#00bdae"] {
+    fill: #f24c4c !important;
+    stroke: #f24c4c !important;
+  }
+
+  #pie-chart_chart_legend_shape_2 {
+    fill: #357cd2 !important;
+  }
+  #pie-chart_chart_legend_shape_1 {
+    fill: #00bdae !important;
+  }
+  #pie-chart_chart_legend_shape_0 {
+    fill: #f24c4c !important;
+  }
+
+  header {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    border-bottom: rgba(0, 0, 0, 0.23) solid 1px;
+    border-radius: 7px 7px 0 0;
+    padding: 15px 20px;
+    margin-bottom: 30px;
+
+    h4 {
+      font-size: 28px;
+      color: #444;
+      font-weight: 400;
+      margin-right: 40px;
+    }
+
+    .select {
+      max-width: 280px;
+    }
+  }
+}

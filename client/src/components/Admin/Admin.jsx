@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Loader/Loader";
 
@@ -6,7 +6,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import "./Admin.scss";
-import { createAdmin, deleteAdmin, editAdmin, getAdmin } from "../../actions/";
+import { createAdmin, deleteAdmin, editAdmin } from "../../actions/";
 import { Button, Grid, TextField } from "@mui/material";
 
 const Admin = () => {
@@ -20,9 +20,6 @@ const Admin = () => {
     password: "",
   });
 
-  useEffect(() => {
-    dispatch(getAdmin());
-  }, [dispatch]);
 
   const isFormValid = () =>
     (admin.name.length !== 0 || currentAdmin.name.length !== 0) &&
