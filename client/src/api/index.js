@@ -12,11 +12,10 @@ const config = {
 // category
 export const getCategory = () => axios.get(`${URL}/api/category`, config);
 export const createCategory = (category) =>
-  axios.post(`${URL}/api/category`, category, config);
+  axios.post(`${URL}/api/category`, category);
 export const editCategory = (id, updatedCategory) =>
-  axios.put(`${URL}/api/category/${id}`, updatedCategory, config);
-export const deleteCategory = (id) =>
-  axios.delete(`${URL}/api/category/${id}`, config);
+  axios.put(`${URL}/api/category/${id}`, updatedCategory);
+export const deleteCategory = (id) => axios.delete(`${URL}/api/category/${id}`);
 
 // application
 export const getApplication = () => axios.get(`${URL}/api/application`);

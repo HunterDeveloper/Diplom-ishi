@@ -6,7 +6,6 @@ import axios from "axios";
 import { IconButton, Snackbar } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch } from "react-redux";
-import { getAdmin, getCategory } from "../actions";
 
 const Control = () => {
   const dispatch = useDispatch();
@@ -14,14 +13,10 @@ const Control = () => {
   const [admin, setAdmin] = useState({});
   const [error, setError] = useState("");
 
-  console.log(admin);
-
   useEffect(() => {
     if (!localStorage.getItem("authToken")) {
       navigate("/control/auth");
     }
-    dispatch(getAdmin());
-    dispatch(getCategory());
 
     const fetchData = async () => {
       const config = {
@@ -44,7 +39,6 @@ const Control = () => {
         setError("You are not authorized please login");
       }
     };
-
     fetchData();
   }, [navigate, dispatch]);
 
@@ -81,7 +75,7 @@ const Control = () => {
       />
       <Category />
       {admin.status === "owner" ? <Admin admin={admin} /> : null}
-      <Application />
+      <Application admin={admin} />
     </>
   );
 };

@@ -33,8 +33,6 @@ const Form = () => {
   const [date, setDate] = useState("");
   const [files, setFiles] = useState("");
 
-  console.log(files);
-
   useEffect(() => {
     dispatch(getCategory());
   }, [dispatch]);
@@ -43,8 +41,6 @@ const Form = () => {
 
   const isFormValid = () => {
     return (
-      name.length !== 0 &&
-      surname.length !== 0 &&
       city.length !== 0 &&
       region.length !== 0 &&
       categoryId.length !== 0 &&

@@ -15,9 +15,9 @@ exports.getApplication = async (req, res, next) => {
 exports.createApplication = (req, res, next) => {
   const application = req.body;
   let files = [];
+  if (req.files) req.files.map((f) => files.push(f.filename));
+  application.files = files;
   try {
-    if (req.files) req.files.map((f) => files.push(f.filename));
-    application.files = files;
     const newApplication = new Application(application);
     newApplication.save();
 

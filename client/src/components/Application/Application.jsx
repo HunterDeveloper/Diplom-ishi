@@ -2,15 +2,20 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getApplication, getCategory, editApplication } from "../../actions";
 import { FormControl, Grid, InputLabel, MenuItem, Select } from "@mui/material";
-import Loader from "../Loader/Loader";
 
 import "./Application.scss";
 import { Link } from "react-router-dom";
 
-const Application = () => {
+const Application = (props) => {
   const dispatch = useDispatch();
 
-  const applications = useSelector((state) => state.applications);
+  const applications = useSelector((state) =>
+    props.admin.categoryId === "all"
+      ? state.applications
+      : state.applications.filter(
+          (a) => a.categoryId === props.admin.categoryId
+        )
+  );
 
   useEffect(() => {
     dispatch(getApplication());
@@ -27,7 +32,7 @@ const Application = () => {
               <span className="num">number</span>
               <span className="name">Name</span>
               <span className="city">city</span>
-              <span className="file_link">file</span>
+              <span className="file_link">view</span>
               <span className="status">status</span>
             </li>
             {applications.length ? (
@@ -39,8 +44,8 @@ const Application = () => {
                     <p className="text">{app.surname}</p>
                   </div>
                   <p className="city text">{app.city}</p>
-                  <Link className="file_link" to={`/control/files/${app._id}`}>
-                    Files
+                  <Link className="file_link" to={`/control/view/${app._id}`}>
+                    Open
                   </Link>
                   <div className="status">
                     <FormControl fullWidth className="select">
@@ -72,7 +77,11 @@ const Application = () => {
                 </li>
               ))
             ) : (
-              <Loader />
+              <span
+                style={{ display: "block", width: "100%", textAlign: "center" }}
+              >
+                There are no applications
+              </span>
             )}
           </ul>
         </div>

@@ -9,14 +9,51 @@ h2 {
   margin-bottom: 30px;
 }
 
-.file_list {
+.View {
   width: 100%;
+  padding: 30px 80px;
+  box-shadow: rgb(0 0 0 / 20%) 0px 3px 3px -2px,
+    rgb(0 0 0 / 14%) 0px 3px 4px 0px, rgb(0 0 0 / 12%) 0px 1px 8px 0px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-bottom: 30px;
+  margin-top: 15px;
+
+  h4 {
+    width: 100%;
+    font-size: 18px;
+    font-weight: 500;
+    color: #101010;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba($color: #000000, $alpha: 0.3);
+    border-bottom-width: 10%;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    span {
+      font-weight: 400;
+    }
+  }
+}
+
+.file_list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
 
   .Files {
-    width: 100%;
+    width: 48%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -40,14 +77,37 @@ h2 {
     .file_image,
     .file_video {
       margin: auto;
-      max-width: 800px;
-      height: 600px;
+      max-width: 600px;
+      height: 300px;
 
       img,
       video {
         width: 100%;
         height: 100%;
         object-fit: contain;
+      }
+    }
+  }
+}
+@media (max-width: 900px) {
+  .View {
+    padding: 15px 20px;
+    margin-bottom: 0;
+
+    h4 {
+      font-size: 15px;
+    }
+  }
+
+  .file_list {
+    .Files {
+      width: 100%;
+      padding: 10px;
+
+      header {
+        h3 {
+          font-size: 18px;
+        }
       }
     }
   }

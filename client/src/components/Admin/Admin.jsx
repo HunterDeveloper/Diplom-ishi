@@ -1,32 +1,51 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Loader from "../Loader/Loader";
 
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import "./Admin.scss";
-import { createAdmin, deleteAdmin, editAdmin } from "../../actions/";
-import { Button, Grid, TextField } from "@mui/material";
+import { createAdmin, deleteAdmin, editAdmin, getAdmin } from "../../actions/";
+import {
+  Button,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 
 const Admin = (props) => {
-  console.log(props);
   const dispatch = useDispatch();
   const admins = useSelector((state) =>
     state.admins.filter((a) => a._id !== props.admin._id)
   );
-  const [admin, setAdmin] = useState({ name: "", email: "", password: "" });
+  const categories = useSelector((state) => state.categories);
+
+  const [admin, setAdmin] = useState({
+    name: "",
+    email: "",
+    password: "",
+    categoryId: "all",
+  });
   const [currentId, setCurrentId] = useState();
   const [currentAdmin, setCurrentAdmin] = useState({
     name: "",
     email: "",
     password: "",
+    categoryId: "all",
   });
+
+  useEffect(() => {
+    dispatch(getAdmin());
+  }, [dispatch]);
 
   const isFormValid = () =>
     (admin.name.length !== 0 || currentAdmin.name.length !== 0) &&
     (admin.email.length !== 0 || currentAdmin.email.length !== 0) &&
-    (admin.password.length >= 6 || currentAdmin.password.length >= 6);
+    (admin.password.length >= 6 || currentAdmin.password.length >= 6) &&
+    (admin.categoryId.length >= 0 || currentAdmin.categoryId.length >= 0);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -51,9 +70,9 @@ const Admin = (props) => {
   };
 
   const clean = () => {
-    setCurrentAdmin({ name: "", email: "", password: "" });
+    setCurrentAdmin({ name: "", email: "", password: "", categoryId: "" });
     setCurrentId("");
-    setAdmin({ name: "", email: "", password: "" });
+    setAdmin({ name: "", email: "", password: "", categoryId: "" });
   };
 
   return (
@@ -79,7 +98,11 @@ const Admin = (props) => {
                 </li>
               ))
             ) : (
-              <Loader />
+              <span
+                style={{ display: "block", width: "100%", textAlign: "center" }}
+              >
+                There are no admins
+              </span>
             )}
           </ul>
         </div>
@@ -122,6 +145,33 @@ const Admin = (props) => {
               }
               className="input"
             />
+            <FormControl fullWidth className="select">
+              <InputLabel id="demo-simple-select-label">
+                Tip category
+              </InputLabel>
+              <Select
+                value={currentId ? currentAdmin.categoryId : admin.categoryId}
+                label="Murojat turi"
+                onChange={(e) =>
+                  currentId
+                    ? setCurrentAdmin({
+                        ...currentAdmin,
+                        categoryId: e.target.value,
+                      })
+                    : setAdmin({ ...admin, categoryId: e.target.value })
+                }
+              >
+                <MenuItem value={"all"} key={1}>
+                  All categories
+                </MenuItem>
+                {!!categories &&
+                  categories.map((c) => (
+                    <MenuItem value={c._id} key={1}>
+                      {c.name}
+                    </MenuItem>
+                  ))}
+              </Select>
+            </FormControl>
             <Button
               size="large"
               variant="contained"

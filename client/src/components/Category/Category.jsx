@@ -1,13 +1,18 @@
 import { Button, Grid, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Loader } from "../../components";
 
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import "./Category.scss";
-import { createCategory, deleteCategory, editCategory } from "../../actions";
+import {
+  createCategory,
+  deleteCategory,
+  editCategory,
+  getCategory,
+} from "../../actions";
+import { useEffect } from "react";
 
 const Category = () => {
   const dispatch = useDispatch();
@@ -19,6 +24,10 @@ const Category = () => {
   const isFormValid = () => {
     return category.length !== 0 || currentCtg.name.length !== 0;
   };
+
+  useEffect(() => {
+    dispatch(getCategory());
+  }, [dispatch]);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -70,7 +79,11 @@ const Category = () => {
                 </li>
               ))
             ) : (
-              <Loader />
+              <span
+                style={{ display: "block", width: "100%", textAlign: "center" }}
+              >
+                There are no category
+              </span>
             )}
           </ul>
         </div>

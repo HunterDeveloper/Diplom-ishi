@@ -19,6 +19,10 @@ const adminSchema = mongoose.Schema({
     type: String,
     required: [true, "Please enter admin status"],
   },
+  categoryId: {
+    type: String,
+    required: [true, "Please enter admin category"],
+  },
 });
 
 adminSchema.methods.getSignedToken = function () {

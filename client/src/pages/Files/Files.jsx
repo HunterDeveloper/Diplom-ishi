@@ -4,8 +4,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { getApplication, getAdmin } from "../../actions";
+import { getApplication, getAdmin, getCategory } from "../../actions";
 import { Loader, Navbar } from "../../components";
+import moment from "moment";
 
 import "./Files.scss";
 
@@ -20,13 +21,16 @@ const Files = () => {
   const application = useSelector((state) =>
     id ? state.applications.find((a) => a._id === id) : null
   );
+  const category = useSelector((state) =>
+    application
+      ? state.categories.find((c) => c._id === application.categoryId)
+      : null
+  );
 
   useEffect(() => {
     if (!localStorage.getItem("authToken")) {
       navigate("/control/auth");
     }
-    dispatch(getAdmin());
-    dispatch(getApplication());
 
     const fetchData = async () => {
       const config = {
@@ -51,6 +55,10 @@ const Files = () => {
     };
 
     fetchData();
+
+    dispatch(getAdmin());
+    dispatch(getApplication());
+    dispatch(getCategory());
   }, [navigate, dispatch]);
 
   const handleClose = (event, reason) => {
@@ -85,7 +93,34 @@ const Files = () => {
         action={action}
       />
       <Grid lg={8} item container style={{ margin: "auto" }}>
-        <h2>Files page</h2>
+        <h2>View page</h2>
+
+        {!!application && (
+          <div className="View">
+            <h4>
+              Name <span>{application.name || "Not given"}</span>
+            </h4>
+            <h4>
+              Surname <span>{application.surname || "Not given"}</span>
+            </h4>
+            <h4>
+              City <span>{application.city}</span>
+            </h4>
+            <h4>
+              Region <span>{application.region}</span>
+            </h4>
+            <h4>
+              Description <span>{application.description}</span>
+            </h4>
+            <h4>
+              Category <span>{category ? category.name : null}</span>
+            </h4>
+            <h4>
+              Date <span>{moment(application.date).format("LLLL")}</span>
+            </h4>
+          </div>
+        )}
+
         <div className="file_list">
           {application ? (
             application.files.map((f, i) => {

@@ -10,15 +10,21 @@ const Application = require("../models/Application");
 const { uploader } = require("../utils/fileUpload");
 const router = Router();
 
-router.route("/").get(getApplication);
-router.route("/").post(uploader.array("files", 3), createApplication);
-router.route("/:id").put(protect, editApplication);
-router.route("/:id").delete(protect, deleteApplication);
-
 // helper all delete route
 router.route("/delete").delete(async (req, res, next) => {
-  await Application.deleteMany();
-  res.json("Deleted");
+  try {
+    await Application.deleteMany();
+    res
+      .status(200)
+      .json({ success: true, message: "All applications deleted" });
+  } catch (error) {
+    next(error.message);
+  }
 });
+
+router.route("/").get(getApplication);
+router.route("/").post(uploader.array("files", 3), createApplication);
+router.route("/:id").put(editApplication);
+router.route("/:id").delete(deleteApplication);
 
 module.exports = router;

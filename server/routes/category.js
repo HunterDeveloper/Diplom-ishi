@@ -8,9 +8,9 @@ const {
 const { protect } = require("../middlewares/auth");
 const router = Router();
 
-router.route("/").get( getCategory);
-router.route("/").post(protect, createCategory);
-router.route("/:id").put(protect, editCategory);
-router.route("/:id").delete(protect, deleteCategory);
+router.route("/").get(getCategory);
+router.route("/").post(createCategory);
+router.route("/:id").put(editCategory);
+router.route("/:id").delete(deleteCategory);
 
 module.exports = router;
