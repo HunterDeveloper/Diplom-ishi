@@ -12,7 +12,7 @@ const { protect } = require("../middlewares/auth");
 const router = Router();
 
 router.route("/").get(protect, getAdmins);
-router.route("/").post(protect, createAdmin);
+router.route("/").post( createAdmin);
 router.route("/:id").put(protect, editAdmin);
 router.route("/:id").delete(protect, deleteAdmin);
 router.route("/auth").post(login);

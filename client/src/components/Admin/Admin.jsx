@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Loader/Loader";
 
@@ -9,9 +9,12 @@ import "./Admin.scss";
 import { createAdmin, deleteAdmin, editAdmin } from "../../actions/";
 import { Button, Grid, TextField } from "@mui/material";
 
-const Admin = () => {
+const Admin = (props) => {
+  console.log(props);
   const dispatch = useDispatch();
-  const admins = useSelector((state) => state.admins);
+  const admins = useSelector((state) =>
+    state.admins.filter((a) => a._id !== props.admin._id)
+  );
   const [admin, setAdmin] = useState({ name: "", email: "", password: "" });
   const [currentId, setCurrentId] = useState();
   const [currentAdmin, setCurrentAdmin] = useState({
@@ -19,7 +22,6 @@ const Admin = () => {
     email: "",
     password: "",
   });
-
 
   const isFormValid = () =>
     (admin.name.length !== 0 || currentAdmin.name.length !== 0) &&
@@ -65,7 +67,7 @@ const Admin = () => {
                 <li key={idx}>
                   <span>#{idx + 1}</span>
                   <p>{a.name}</p>
-                  <p>{a.email}</p>
+                  <p className="email">{a.email}</p>
                   <div className="item_icons">
                     <button onClick={() => onEditHandler(a._id)}>
                       <EditIcon />

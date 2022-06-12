@@ -20,9 +20,10 @@ app.use(
   })
 );
 
-app.use(bodyParser.json());
-// app.use(bodyParser.json({ limit: "30mb", extended: true }));
-// app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(express.static(`${__dirname}/uploads`));
+
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 // routes
 app.use("/api/application", require("./routes/application"));

@@ -62,4 +62,14 @@
       max-width: 280px;
     }
   }
+
+  @media (max-width: 900px) {
+    #pie-chart_svg {
+      height: 600px !important;
+    }
+
+    #pie-chart_border {
+      height: 600px !important;
+    }
+  }
 }

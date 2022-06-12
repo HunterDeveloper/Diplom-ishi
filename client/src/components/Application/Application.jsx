@@ -27,6 +27,7 @@ const Application = () => {
               <span className="num">number</span>
               <span className="name">Name</span>
               <span className="city">city</span>
+              <span className="file_link">file</span>
               <span className="status">status</span>
             </li>
             {applications.length ? (
@@ -38,7 +39,9 @@ const Application = () => {
                     <p className="text">{app.surname}</p>
                   </div>
                   <p className="city text">{app.city}</p>
-                  <Link to={`/control/files/${app._id}`}>Files</Link>
+                  <Link className="file_link" to={`/control/files/${app._id}`}>
+                    Files
+                  </Link>
                   <div className="status">
                     <FormControl fullWidth className="select">
                       <InputLabel id="demo-simple-select-label">

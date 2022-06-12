@@ -14,6 +14,8 @@ const Control = () => {
   const [admin, setAdmin] = useState({});
   const [error, setError] = useState("");
 
+  console.log(admin);
+
   useEffect(() => {
     if (!localStorage.getItem("authToken")) {
       navigate("/control/auth");
@@ -69,7 +71,7 @@ const Control = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar admin={admin} />
       <Snackbar
         open={!!error}
         autoHideDuration={6000}
@@ -78,7 +80,7 @@ const Control = () => {
         action={action}
       />
       <Category />
-      {admin.status === "owner" ? <Admin /> : null}
+      {admin.status === "owner" ? <Admin admin={admin} /> : null}
       <Application />
     </>
   );

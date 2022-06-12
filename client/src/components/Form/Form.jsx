@@ -43,6 +43,8 @@ const Form = () => {
 
   const isFormValid = () => {
     return (
+      name.length !== 0 &&
+      surname.length !== 0 &&
       city.length !== 0 &&
       region.length !== 0 &&
       categoryId.length !== 0 &&
@@ -54,27 +56,31 @@ const Form = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    const data = new FormData();
+    const formData = new FormData();
 
-    data.append("city", city);
-    data.append("region", region);
-    data.append("categoryId", categoryId);
-    data.append("description", description);
-    data.append("files", files);
-    data.append("name", name);
-    data.append("surname", surname);
-    data.append("date", date);
+    formData.append("city", city);
+    formData.append("region", region);
+    formData.append("categoryId", categoryId);
+    formData.append("description", description);
+    formData.append("name", name);
+    formData.append("surname", surname);
+    formData.append("date", date);
+    let fileArr = Object.keys(files);
+    fileArr.map((f) => formData.append("files", files[f]));
 
+    dispatch(createApplication(formData));
     dispatch(chartApplications());
-    dispatch(createApplication(data));
     clean();
   };
 
   const clean = () => {
+    setName("");
+    setSurname("");
     setCity("");
     setRegion("");
     setCategoryId("");
     setDescription("");
+    setDate("");
     setFiles("");
   };
 
@@ -149,7 +155,12 @@ const Form = () => {
               setDate(`${newValue}`);
             }}
             renderInput={(params) => (
-              <TextField className="input" {...params} error={false} />
+              <TextField
+                className="input"
+                {...params}
+                value={date}
+                error={false}
+              />
             )}
           />
         </LocalizationProvider>

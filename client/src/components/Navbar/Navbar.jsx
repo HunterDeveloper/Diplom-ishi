@@ -13,7 +13,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import "./Navbar.scss";
 
-const Navbar = () => {
+const Navbar = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -40,6 +40,12 @@ const Navbar = () => {
               Home
             </Link>
           </Typography>
+          {props.admin ? (
+            <div className="admin">
+              <span>{props.admin.name}</span>
+              <p>{props.admin.email}</p>
+            </div>
+          ) : null}
           {location.pathname === "/" ? (
             <Link className="control_link" to="/control/auth">
               <Button color="inherit" size="large">

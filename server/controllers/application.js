@@ -1,28 +1,6 @@
 const Application = require("../models/Application");
 const mongoose = require("mongoose");
 const ErrorResponse = require("../utils/ErrorResponse");
-const multer = require("multer");
-
-var storage = multer.diskStorage({
-  fileFilter: function (req, file, callback) {
-    if (
-      ["png", "gif", "jpg", "mp4", "jpeg"].indexOf(
-        file.originalname.split(".")[file.originalname.split(".").length - 1]
-      ) === -1
-    ) {
-      return callback(new Error("Wrong extension type"));
-    }
-    callback(null, true);
-  },
-  destination: function (req, file, callback) {
-    callback(null, ".../uploads");
-  },
-  filename: function (req, file, callback) {
-    callback(null, file.fieldname + "-" + Date.now());
-  },
-});
-
-var upload = multer({ storage: storage }).array("files", 2);
 
 exports.getApplication = async (req, res, next) => {
   try {
@@ -35,22 +13,13 @@ exports.getApplication = async (req, res, next) => {
 };
 
 exports.createApplication = (req, res, next) => {
-  console.log(req.body);
-  console.log(req.files);
+  const application = req.body;
+  let files = [];
   try {
-    // upload(req, res, function (err) {
-    //   //console.log(req.body);
-    //   console.log(req.files);
-    //   if (err) {
-    //     return res.end("Error uploading file.");
-    //   }
-    //   res.end("File is uploaded");
-    // });
-
-    // const application = req.body;
-    // const newApplication = new Application(application);
-
-    // newApplication.save();
+    if (req.files) req.files.map((f) => files.push(f.filename));
+    application.files = files;
+    const newApplication = new Application(application);
+    newApplication.save();
 
     res.status(201).json({ success: true, data: newApplication });
   } catch (error) {

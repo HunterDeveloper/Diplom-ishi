@@ -6,7 +6,6 @@
   padding: 30px 40px;
   box-shadow: rgb(0 0 0 / 20%) 0px 3px 3px -2px,
     rgb(0 0 0 / 14%) 0px 3px 4px 0px, rgb(0 0 0 / 12%) 0px 1px 8px 0px;
-  margin-top: 80px;
   margin-bottom: 100px;
   border-radius: 5px;
 
@@ -48,13 +47,25 @@
       }
 
       .city {
-        width: 18%;
+        width: 14%;
       }
 
       .text {
+        width: 14%;
         font-size: 17px;
         font-weight: 400;
         color: #101010;
+      }
+
+      .file_link {
+        text-decoration: none;
+        color: #101010;
+        font-weight: 500;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
 
       .status {
@@ -100,6 +111,32 @@
       .num {
         color: rgba($color: #000000, $alpha: 0.4);
         font-weight: 500;
+      }
+      .file_link {
+        font-size: 16px;
+        color: rgba($color: #000000, $alpha: 0.4);
+        font-weight: 500;
+      }
+    }
+  }
+
+  @media (max-width: 900px) {
+    & {
+      padding: 15px 20px;
+    }
+    .menu .item {
+      padding: 10px 15px;
+
+      .num,
+      .name,
+      .file_link {
+        font-size: 14px;
+      }
+      .city {
+        display: none;
+      }
+      .status {
+        width: 80px;
       }
     }
   }
