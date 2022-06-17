@@ -79,7 +79,7 @@ const Admin = (props) => {
     <Grid lg={8} item container style={{ margin: "auto" }}>
       <div className="Admin">
         <div className="admin_list">
-          <h3>Admin list</h3>
+          <h3>Adminlar ro'yxati</h3>
           <ul className="menu">
             {admins.length ? (
               admins.map((a, idx) => (
@@ -101,16 +101,16 @@ const Admin = (props) => {
               <span
                 style={{ display: "block", width: "100%", textAlign: "center" }}
               >
-                There are no admins
+                Adminlar yo'q
               </span>
             )}
           </ul>
         </div>
         <div className="admin_form">
-          <h3>Admin form</h3>
+          <h3>Admin formasi</h3>
           <form className="form" onSubmit={onSubmitHandler}>
             <TextField
-              label="Name"
+              label="Ism"
               variant="outlined"
               value={currentId ? currentAdmin.name : admin.name}
               onChange={(e) =>
@@ -132,7 +132,7 @@ const Admin = (props) => {
               className="input"
             />
             <TextField
-              label="Password"
+              label="Parol"
               variant="outlined"
               value={currentId ? currentAdmin.password : admin.password}
               onChange={(e) =>
@@ -162,7 +162,7 @@ const Admin = (props) => {
                 }
               >
                 <MenuItem value={"all"} key={1}>
-                  All categories
+                  Hammasi
                 </MenuItem>
                 {!!categories &&
                   categories.map((c) => (
@@ -179,7 +179,7 @@ const Admin = (props) => {
               className="button"
               disabled={!isFormValid()}
             >
-              {currentId ? "Edit admin" : "Add admin"}
+              {currentId ? "O'zgartirish" : "Yaratish"}
             </Button>
           </form>
         </div>

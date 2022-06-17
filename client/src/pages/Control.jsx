@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Admin, Application, Category, Navbar } from "../components";
+import { Admin, Application, Category, ChartPie, Navbar } from "../components";
 
 import axios from "axios";
 import { IconButton, Snackbar } from "@mui/material";
@@ -76,6 +76,7 @@ const Control = () => {
       <Category />
       {admin.status === "owner" ? <Admin admin={admin} /> : null}
       <Application admin={admin} />
+      <ChartPie admin={admin} />
     </>
   );
 };

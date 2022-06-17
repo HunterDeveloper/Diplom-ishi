@@ -6,13 +6,15 @@ export const chartApplications = (id) => async (dispatch) => {
     const { data } = await api.getApplication();
 
     const arr = [
-      { x: "Cancel", y: 0, text: "" },
-      { x: "Success", y: 0, text: "" },
-      { x: "In progress", y: 0, text: "" },
+      { x: "Bekor qilingan", y: 0, text: "" },
+      { x: "Bajarilgan", y: 0, text: "" },
+      { x: "Jarayonda", y: 0, text: "" },
     ];
 
     if (id) {
-      let cloneArr = data.data.filter((elem) => elem.categoryId === id);
+      let cloneArr = data.data.filter((elem) =>
+        id === "all" ? true : elem.categoryId === id
+      );
 
       cloneArr.map((elem) => {
         if (elem.status === "cancel") {
@@ -42,6 +44,8 @@ export const chartApplications = (id) => async (dispatch) => {
         return elem;
       });
     }
+
+    console.log(arr);
 
     dispatch({ type: CHART_APPLICATION, payload: arr });
   } catch (error) {

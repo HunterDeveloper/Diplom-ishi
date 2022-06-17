@@ -53,7 +53,7 @@ const Auth = () => {
   return (
     <div className="Auth">
       <div className="auth_content">
-        <h3>Authentication</h3>
+        <h3>Kirish</h3>
         {error && <span className="error-message">{error}</span>}
         <form className="auth_form" onSubmit={onSubmitHandler}>
           <TextField

@@ -61,7 +61,7 @@ const Category = () => {
     <Grid lg={8} item container style={{ margin: "auto" }}>
       <div className="Category">
         <div className="category_list">
-          <h3>Category list</h3>
+          <h3>Kategoriyalar ro'yxati</h3>
           <ul className="menu">
             {categories.length ? (
               categories.map((ctg, idx) => (
@@ -82,13 +82,13 @@ const Category = () => {
               <span
                 style={{ display: "block", width: "100%", textAlign: "center" }}
               >
-                There are no category
+                Kategoriyalar yo'q
               </span>
             )}
           </ul>
         </div>
         <div className="category_form">
-          <h3>Category form</h3>
+          <h3>Kategoriya formasi</h3>
           <form className="form" onSubmit={onSubmitHandler}>
             <TextField
               label="Kategoriya"
@@ -108,7 +108,7 @@ const Category = () => {
               type="submit"
               className="button"
             >
-              {currentId ? "Edit category" : "Add category"}
+              {currentId ? "O'rgartirish" : "Yaratish"}
             </Button>
           </form>
         </div>

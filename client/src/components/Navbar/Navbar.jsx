@@ -37,7 +37,7 @@ const Navbar = (props) => {
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <Link to="/" className="nav_link">
-              Home
+              ASOSIY
             </Link>
           </Typography>
           {props.admin ? (

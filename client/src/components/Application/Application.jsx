@@ -25,14 +25,14 @@ const Application = (props) => {
   return (
     <Grid lg={8} item container style={{ margin: "auto" }}>
       <div className="Application">
-        <h3>Application list</h3>
+        <h3>Murojatlar ro'yxati</h3>
         <div className="app_list">
           <ul className="menu">
             <li className="item-header item">
-              <span className="num">number</span>
-              <span className="name">Name</span>
-              <span className="city">city</span>
-              <span className="file_link">view</span>
+              <span className="num">raqam</span>
+              <span className="name">ism</span>
+              <span className="city">shaxar</span>
+              <span className="file_link">kirish</span>
               <span className="status">status</span>
             </li>
             {applications.length ? (
@@ -45,7 +45,7 @@ const Application = (props) => {
                   </div>
                   <p className="city text">{app.city}</p>
                   <Link className="file_link" to={`/control/view/${app._id}`}>
-                    Open
+                    Kirish
                   </Link>
                   <div className="status">
                     <FormControl fullWidth className="select">
@@ -63,13 +63,13 @@ const Application = (props) => {
                         }
                       >
                         <MenuItem value={"in-progress"} key={1}>
-                          In Progress
+                          Jarayonda
                         </MenuItem>
                         <MenuItem value={"cancel"} key={2}>
-                          Canceled
+                          Bekor qilingan
                         </MenuItem>
                         <MenuItem value={"success"} key={3}>
-                          Success
+                          Bajarilgan
                         </MenuItem>
                       </Select>
                     </FormControl>
