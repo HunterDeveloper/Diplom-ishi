@@ -110,7 +110,8 @@ const Files = () => {
               Region <span>{application.region}</span>
             </h4>
             <h4>
-              Description <span>{application.description}</span>
+              Description{" "}
+              <span style={{ width: "60%" }}>{application.description}</span>
             </h4>
             <h4>
               Category <span>{category ? category.name : null}</span>

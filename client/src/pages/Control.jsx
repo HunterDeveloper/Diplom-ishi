@@ -73,7 +73,7 @@ const Control = () => {
         message={error}
         action={action}
       />
-      <Category />
+      {admin.status === "owner" ? <Category /> : null}
       {admin.status === "owner" ? <Admin admin={admin} /> : null}
       <Application admin={admin} />
       <ChartPie admin={admin} />
